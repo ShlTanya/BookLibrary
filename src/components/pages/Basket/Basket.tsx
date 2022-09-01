@@ -33,8 +33,8 @@ export const BasketPage = () => {
                 <TitleSt>
                   <LinkPr url={`/books/${book.book.isbn13}`} text={book.book.title}></LinkPr>
                 </TitleSt>
-                <TextSt>price: {book.book.price}</TextSt>
                 <TextSt>{book.book.authors}</TextSt>
+                <TextSt>price: {book.book.price}</TextSt>
                 <CountDivSt>
                   <Button
                     text={'+'}
@@ -82,7 +82,8 @@ const HomeSt = styled.div`
 `;
 
 const BasketSt = styled.div`
-  width: 1200px;
+  max-width: 1200px;
+  min-width: 1200px;
 `;
 
 const MainListSt = styled.div`
@@ -96,9 +97,10 @@ const TotalSt = styled.div`
   min-height: 40px;
   text-align: right;
 
+  font-family: ${getFontFamily()};
+  font-size: 36px;
   font-weight: 700;
-  font-size: 20px;
-  line-height: 20px;
+  margin-bottom: 20px;
 `;
 
 const CardSt = styled.div`

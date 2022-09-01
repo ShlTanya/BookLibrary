@@ -24,7 +24,7 @@ export const BookCard = ({ book }: IBookCard) => {
 };
 
 const CardSt = styled.div`
-  width: 352px;
+  width: 445px;
   height: 453px;
   display: inline-block;
   flex-direction: column;
@@ -33,7 +33,7 @@ const CardSt = styled.div`
 `;
 
 const DivImgSt = styled.div`
-  width: 352px;
+  width: 445px;
   min-height: 264px;
   max-height: 264px;
   margin-bottom: 20px;

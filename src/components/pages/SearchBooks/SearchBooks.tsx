@@ -110,7 +110,7 @@ const MainListSt = styled.div`
 const CardSt = styled.div`
   padding: 0 0 40px 0;
   display: grid;
-  grid-template-columns: 296px 1fr;
+  grid-template-columns: 389px 1fr;
 `;
 
 const BtnFavSt = styled(ButtonFav)`
