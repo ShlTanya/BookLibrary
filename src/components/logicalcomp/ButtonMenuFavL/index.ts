@@ -1,0 +1,1 @@
+export { ButtonMenuFavL } from './ButtonMenuFavL';

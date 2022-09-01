@@ -1,0 +1,1 @@
+export { ButtonMenuFav } from './ButtonMenuFav';
