@@ -43,6 +43,7 @@ export const searchBooksSlice = createSlice({
     },
     setSearchText: (state, action) => {
       state.searchText = action.payload;
+      state.selPageNo = 1;
     },
     setItemsCount: (state, action) => {
       state.itemsCount = action.payload;

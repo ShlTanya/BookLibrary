@@ -17,7 +17,6 @@ export const BookCard = ({ book }: IBookCard) => {
       <TitleSt>
         <LinkPr url={`/books/${book.isbn13}`} text={book.title}></LinkPr>
       </TitleSt>
-      <TextSt>{book.authors}</TextSt>
       <PriceSt>{book.price}</PriceSt>
     </CardSt>
   );
@@ -25,11 +24,11 @@ export const BookCard = ({ book }: IBookCard) => {
 
 const CardSt = styled.div`
   width: 445px;
-  height: 453px;
+  height: 410px;
   display: inline-block;
   flex-direction: column;
-  align-items: start;
   box-sizing: border-box;
+  border: 2px solid ${ColorService.BLUE};
 `;
 
 const DivImgSt = styled.div`
@@ -38,6 +37,7 @@ const DivImgSt = styled.div`
   max-height: 264px;
   margin-bottom: 20px;
   background: ${ColorService.BLUE};
+  margin: -2px 0 0 -2px;
 `;
 
 const TitleSt = styled.div`
@@ -48,48 +48,28 @@ const TitleSt = styled.div`
 
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: wrap;
 
   font-weight: 700;
   font-size: 24px;
   line-height: 32px;
   text-transform: uppercase;
 
-  padding: 8px 0 8px 0;
+  padding: 8px 8px 8px 8px;
 
   :hover {
     cursor: pointer;
   }
 `;
 
-const TextSt = styled.div`
-  width: 100%;
-  min-height: 40px;
-  max-height: 40px;
-  color: ${ColorService.SECONDARY};
-  text-align: left;
-
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: wrap;
-
-  font-family: ${getFontFamily()};
-  font-size: 20px;
-
-  padding-bottom: 8px;
-`;
-
 const PriceSt = styled.div`
   width: 100%;
   height: 32px;
   color: ${ColorService.PRIMARY};
-  text-align: left;
+  text-align: right;
 
   font-family: ${getFontFamily()};
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 700;
-
-  padding: 8px 0 24px 0;
 `;
 
 const ImgSt = styled.img`
