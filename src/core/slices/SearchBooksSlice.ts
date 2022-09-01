@@ -21,7 +21,7 @@ const initialState: ISearchBooksState = {
 export const getSearchBooksAction = createAction<{
   searchText: string;
   selPageNo: number;
-  favList: string[];
+  favList: IBook[];
 }>(actions.GET_SEARCHBOOKS);
 
 export const searchBooksSlice = createSlice({
@@ -59,7 +59,7 @@ export const searchBooksSlice = createSlice({
     setFavBook: (state, action) => {
       const newBooks = state?.booksInfo?.books.map((book: IBook) => ({
         ...book,
-        isFav: book.isbn13 === action.payload ? !book.isFav : book.isFav,
+        isFav: book === action.payload ? !book.isFav : book.isFav,
       }));
       state.booksInfo = { ...action.payload, books: newBooks };
     },

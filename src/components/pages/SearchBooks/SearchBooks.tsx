@@ -62,11 +62,11 @@ export const SearchBooksPage = () => {
                 isFav={book.isFav}
                 disabled={false}
                 onClick={() => {
-                  dispatch(setFavBook(book.isbn13));
+                  dispatch(setFavBook(book));
                   if (book.isFav) {
-                    dispatch(delFromFav(book.isbn13));
+                    dispatch(delFromFav(book));
                   } else {
-                    dispatch(addToFav(book.isbn13));
+                    dispatch(addToFav(book));
                   }
                 }}></BtnFavSt>
             </CardSt>

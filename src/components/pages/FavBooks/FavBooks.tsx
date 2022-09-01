@@ -22,8 +22,9 @@ export const FavBooksPage = () => {
   useEffect(() => {
     const favList = booksStore?.favList;
     const selPageNo = booksStore?.selPageNo;
-    dispatch(getFavBooksAction({ selPageNo, favList }));
-  }, [dispatch, booksStore?.favList, booksStore?.selPageNo]);
+    const itemsCount = booksStore?.itemsCount;
+    dispatch(getFavBooksAction({ selPageNo, itemsCount, favList }));
+  }, [dispatch, booksStore?.favList, booksStore?.selPageNo, booksStore?.itemsCount]);
 
   return (
     <FormTemplateWithTabs activeTabUrl="/my">
@@ -38,7 +39,7 @@ export const FavBooksPage = () => {
                 disabled={false}
                 onClick={() => {
                   if (book.isFav) {
-                    dispatch(delFromFav(book.isbn13));
+                    dispatch(delFromFav(book));
                   }
                 }}></BtnFavSt>
             </CardSt>

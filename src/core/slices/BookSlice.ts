@@ -10,7 +10,7 @@ const initialState: IBookState = {
   book: null,
 };
 
-export const getBookAction = createAction<{ isbn13: string; favList: string[] }>(actions.GET_BOOK);
+export const getBookAction = createAction<{ isbn13: string; favList: IBook[] }>(actions.GET_BOOK);
 
 export const bookSlice = createSlice({
   name: 'book',

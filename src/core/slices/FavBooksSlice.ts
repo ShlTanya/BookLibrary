@@ -1,26 +1,28 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
-import { IBooksInfo } from '../../types/Books';
+import { IBook } from '../../types/Books';
 import { actions } from '../Constants';
 
 interface IFavBooksState {
-  booksInfo: IBooksInfo | null;
-  favList: string[];
+  books: IBook[] | null;
+  favList: IBook[];
   itemsCount: number;
   pageCount: number;
   selPageNo: number;
 }
 
 const initialState: IFavBooksState = {
-  booksInfo: null,
+  books: null,
   favList: [],
   itemsCount: 10,
   pageCount: 1,
   selPageNo: 1,
 };
 
-export const getFavBooksAction = createAction<{ selPageNo: number; favList: string[] }>(
-  actions.GET_FAVBOOKS,
-);
+export const getFavBooksAction = createAction<{
+  selPageNo: number;
+  itemsCount: number;
+  favList: IBook[];
+}>(actions.GET_FAVBOOKS);
 
 export const favBooksSlice = createSlice({
   name: 'favbooks',
@@ -31,13 +33,10 @@ export const favBooksSlice = createSlice({
         state.pageCount = state.favList?.length
           ? Math.ceil(state.favList?.length / state.itemsCount)
           : 0;
-        const books = action.payload.slice(
-          (state.selPageNo - 1) * state.itemsCount,
-          state.selPageNo * state.itemsCount,
-        );
-        state.booksInfo = { ...action.payload, books: books };
+        const books = action.payload.map((book: IBook) => ({ ...book }));
+        state.books = books;
       } else {
-        state.booksInfo = null;
+        state.books = null;
         state.pageCount = 1;
         state.selPageNo = 1;
       }
@@ -55,11 +54,13 @@ export const favBooksSlice = createSlice({
       }
     },
     addToFav: (state, action) => {
-      state.favList.push(action.payload);
+      state.favList.push({ ...action.payload, isFav: true });
     },
     delFromFav: (state, action) => {
-      const ind = state.favList.indexOf(action.payload);
-      if (ind !== -1) {
+      const ind = state.favList.findIndex((item: IBook) => {
+        return item.isbn13 == action.payload.isbn13;
+      });
+      if (ind > -1) {
         state.favList.splice(ind, 1);
       }
     },
@@ -70,8 +71,9 @@ export const { setFavBooks, setItemsCount, setSelPageNo, addToFav, delFromFav } 
   favBooksSlice.actions;
 
 export const getBooks = (state: { favBooksSl: IFavBooksState }) => ({
-  books: state.favBooksSl.booksInfo?.books,
+  books: state.favBooksSl.books,
   favList: state.favBooksSl.favList,
+  itemsCount: state.favBooksSl.itemsCount,
   pageCount: state.favBooksSl.pageCount,
   selPageNo: state.favBooksSl.selPageNo,
 });

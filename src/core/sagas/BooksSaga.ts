@@ -24,7 +24,10 @@ function* getSearchBooksSaga({ payload }: any) {
     );
     const books = res?.data as IBooksInfo;
     books.books.map((book) => {
-      if (payload.favList.indexOf(book.isbn13) != -1) {
+      const ind = payload.favList.findIndex((item: IBook) => {
+        return item.isbn13 == book.isbn13;
+      });
+      if (ind > -1) {
         book.isFav = true;
       } else {
         book.isFav = false;
@@ -38,16 +41,15 @@ function* getSearchBooksSaga({ payload }: any) {
 
 function* getFavBooksSaga({ payload }: any) {
   try {
-    let i: number = 0;
     let books: IBook[] = [];
     if (payload) {
-      const cnt = payload.favList.length;
-      while (i < cnt) {
-        const res: { data: IBook } = yield call(() => BooksService.getBook(payload.favList[i]));
-        const book = res?.data as IBook;
-        book.isFav = true;
+      let itemFrom: number = (payload.selPageNo - 1) * payload.itemsCount;
+      const itemTo = payload.selPageNo * payload.itemsCount;
+      const cnt = payload.favList.length < itemTo ? payload.favList.length : itemTo;
+      while (itemFrom < cnt) {
+        const book = payload.favList[itemFrom] as IBook;
         books.push(book);
-        i++;
+        itemFrom++;
       }
     }
     yield put(setFavBooks(books));
@@ -60,7 +62,10 @@ function* getBookSaga({ payload }: any) {
   try {
     const res: { data: IBook } = yield call(() => BooksService.getBook(payload.isbn13));
     const book = res?.data as IBook;
-    if (payload.favList.indexOf(book.isbn13) != -1) {
+    const ind = payload.favList.findIndex((item: IBook) => {
+      return item.isbn13 == book.isbn13;
+    });
+    if (ind > -1) {
       book.isFav = true;
     } else {
       book.isFav = false;

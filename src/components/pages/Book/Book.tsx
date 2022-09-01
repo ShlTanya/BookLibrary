@@ -45,9 +45,9 @@ export const BookPage = () => {
             onClick={() => {
               dispatch(setFavBook(bookStore));
               if (bookStore?.isFav) {
-                dispatch(delFromFav(bookStore?.isbn13));
+                dispatch(delFromFav(bookStore));
               } else {
-                dispatch(addToFav(bookStore?.isbn13));
+                dispatch(addToFav(bookStore));
               }
             }}></BtnFavSt>
         </DivImgSt>
