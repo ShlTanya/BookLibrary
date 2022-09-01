@@ -3,7 +3,7 @@ import { IBook } from '../../types/Books';
 import { actions } from '../Constants';
 
 interface IFavBooksState {
-  books: IBook[] | null;
+  books: IBook[];
   favList: IBook[];
   itemsCount: number;
   pageCount: number;
@@ -11,7 +11,7 @@ interface IFavBooksState {
 }
 
 const initialState: IFavBooksState = {
-  books: null,
+  books: [],
   favList: [],
   itemsCount: 10,
   pageCount: 1,
@@ -36,7 +36,7 @@ export const favBooksSlice = createSlice({
         const books = action.payload.map((book: IBook) => ({ ...book }));
         state.books = books;
       } else {
-        state.books = null;
+        state.books = [];
         state.pageCount = 1;
         state.selPageNo = 1;
       }
