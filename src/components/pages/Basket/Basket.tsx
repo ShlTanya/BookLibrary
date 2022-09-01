@@ -1,26 +1,22 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { ColorService } from '../../../services/ColorService';
 import { getFontFamily } from '../../../services';
-import { ReactComponent as HomeIcon } from '../../../assets/icon/ArrowLeftIcon.svg';
 import { Title } from '../../atoms/Title';
 import { FormTemplate } from '../../templates/FormTemplate/FormTemplate';
 import { getBasket, addCount, decCount, delFromBasket } from '../../../core/slices/BasketSlice';
 import { LinkPr } from '../../atoms/Link';
 import { Button } from '../../atoms/Button';
+import { ButtonPrevLink } from '../../atoms/ButtonPrevLink';
 
 export const BasketPage = () => {
   const basketStore = useSelector(getBasket);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   return (
     <FormTemplate>
-      <HomeSt onClick={() => navigate(-1)}>
-        <HomeIcon />
-      </HomeSt>
+      <ButtonPrevLink />
       <Title text="BASKET" />
       <BasketSt>
         <MainListSt>
@@ -66,20 +62,6 @@ export const BasketPage = () => {
     </FormTemplate>
   );
 };
-
-const HomeSt = styled.div`
-  width: 100%;
-  display: flex;
-  padding-top: 72px;
-
-  svg path {
-    fill: ${ColorService.PRIMARY};
-  }
-
-  :hover {
-    cursor: pointer;
-  }
-`;
 
 const BasketSt = styled.div`
   max-width: 1200px;

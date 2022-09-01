@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import { ButtonFav } from '../../atoms/ButtonFav';
@@ -10,14 +10,13 @@ import { getFontFamily } from '../../../services';
 import { Title } from '../../atoms/Title';
 import { FormTemplate } from '../../templates/FormTemplate/FormTemplate';
 import { Button } from '../../atoms/Button';
-import { ReactComponent as HomeIcon } from '../../../assets/icon/ArrowLeftIcon.svg';
 import { getBook, getBookAction, setFavBook } from '../../../core/slices/BookSlice';
 import { addToFav, delFromFav, getFavListBooks } from '../../../core/slices/FavBooksSlice';
 import { addToBasket } from '../../../core/slices/BasketSlice';
+import { ButtonPrevLink } from '../../atoms/ButtonPrevLink';
 
 export const BookPage = () => {
   const params = useParams();
-  const navigate = useNavigate();
 
   const bookStore = useSelector(getBook);
   const favList = useSelector(getFavListBooks);
@@ -32,9 +31,7 @@ export const BookPage = () => {
 
   return (
     <FormTemplate>
-      <HomeSt onClick={() => navigate(-1)}>
-        <HomeIcon />
-      </HomeSt>
+      <ButtonPrevLink />
       <Title text={bookStore?.title} />
       <BookSt>
         <DivImgSt>
@@ -87,20 +84,6 @@ export const BookPage = () => {
     </FormTemplate>
   );
 };
-
-const HomeSt = styled.div`
-  width: 100%;
-  display: flex;
-  padding-top: 72px;
-
-  svg path {
-    fill: ${ColorService.PRIMARY};
-  }
-
-  :hover {
-    cursor: pointer;
-  }
-`;
 
 const BookSt = styled.div`
   width: 100%;
